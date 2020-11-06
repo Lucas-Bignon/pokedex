@@ -1,93 +1,93 @@
-
-
-body{
-    background: linear-gradient(180deg, #81ecec,#dfe6e9);
+@font-face {
+	font-family: "Cyberpunk";
+	src: url("./font/Cyberpunk.ttf") format("truetype");
+	font-weight: normal;
+	font-style: normal;
 }
-
+/* grosse lettre */
+body {
+	font-family: "Cyberpunk";
+	font-size: 15px;
+	margin: 0;
+	padding: 20px;
+}
 h1{
-    text-align: center;
+	margin-right: auto;
+	text-align: center;
+	margin-left: auto;
 }
 
 
+/* cours */
+#list {
+	display: grid;
+	list-style-type: none;
+	grid-gap: 10px;
+	grid-template-columns: repeat(auto-fill, minmax(137px, 1fr));
+	width: 100%;
+	margin: 0;
+	padding: 0;
+}
 
-.name{
-    font-size: 30px;
+#list li {
+	cursor: pointer;
+	padding: 5px 10px;
+}
+
+
+/* flexbox */
+main {
+	display: flex;
+}
+
+/* mon css pour la page */
+#description {
+	display: none;
+	position: fixed;
+	background-color: rgb(202, 202, 169);
+	border: 2px solid black;
+	border-radius: 10px;
+	padding: 10px;
+}
+
+/* tuto internet */
+#description.show {
+	display: block;
+}
+
+#description .content {
+	display: flex;
+	grid-gap: 20px;
+}
+
+#description .content img {
+	width: 300px;
+	height: 300px;
+}
+
+#description .content dd {
+	margin-left: 0;
 }
 
 img{
-    width: 200px;
-    height: 200px;
-    border-radius: 100px;
+    width: 100px;
+    height: 100px;
     background-color: rgba(255, 255, 255);
      
 }
 
-dt{
-    color: rgb(201, 201, 201);
-    text-align: left; 
+dl{
+	border: 2px solid black;
+	padding: 10px;
+	background-color: white; 
 }
 
-dd{
-    text-align: left;
-    color: rgb(255, 188, 126); 
+li{
+	border: 2px solid black;
+	text-align: center;
 }
 
-
-#list{
-    
-    /*background-color: rgb(204, 146, 146);*/
+#description .content img {
+	width: 300px;
+	height: 300px;
 }
-
-#list li {
-    cursor: pointer; /* petit doigt à la place du pointer de la souris */
-    background-color:  rgba(250, 114, 23);
-    gap: 20px;
-    margin: 10px 10px; 
-    font-size: 20px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    list-style-type: none;
-    display: inline-block; 
-    border-radius: 10px; 
-    text-align: center; 
-}
-
-
-#list li:hover{
-    padding-bottom: 50px;
-    transition: transform .5s ease;
-    border-radius: 10px;
-    box-shadow: 0px 0px 15px #303952;
-    transform: scale(1.02);
-}
-
-
-#description{
-   display: none; 
-}
-
-#description.show{
-    display: inline;
-}
-
-
-#description:hover{
-    display: flex;
-    background-color: rgb(58, 103, 146); 
-    
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

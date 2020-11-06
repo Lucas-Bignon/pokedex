@@ -1,21 +1,23 @@
-const list = document.getElementById("list"); // recup l'élément css list
-const description = document.getElementById("description"); // recup l'élément html description
+const list = document.getElementById("list");
+const description = document.getElementById("description");
 
-const api = "https://pokeapi.co/api/v2/pokemon?limit=150"; // url de l'api 
+const api = "https://pokeapi.co/api/v2/pokemon?limit=150";
 
 /**
  * Try to parse a response as JSON data
+ * ok
  */
 function transformToJson (response) {
     if (response.ok) {
-        return response.json();             //OSEF
+        return response.json();
     }
 
     throw Error("Content not loaded");
 }
 
 /**
- * Clear the list of all its items //   NETTOIE LA LISTE
+ * Clear the list of all its items
+ * nope
  */
 function emptyList () {
     // ...
@@ -23,74 +25,67 @@ function emptyList () {
 
 /**
  * Create an item, fetch its data and setup event listener
+ * ok
  */
 function createItem (pokemon) {
-    const item = document.createElement("li"); // CREATION ITEM  
-    const photo = document.createElement("img"); // CREATION PHOTO
+    // Create a li tag
+    const item = document.createElement("li");
+    const img = document.createElement("img");
     
-    
-    
-    fetch(pokemon.url).then(transformToJson).then((data) => {// ON RECUP LES DONNEES DE L'API    
-        list.appendChild(item); // on intègre le "item"(=li) dans la "list"(=ul). Ne pas oublier de les déclarer avant si ce n'est pas fait. 
-        //item.textContent=data.name; // on intègre le fichier data -> name de l'API directement dans le "item" (donc dans le <li>)
-        item.appendChild(photo);
-        photo.src = data.sprites.front_shiny;
-         
-
-        item.addEventListener('mouseover', fonction1)
-        function fonction1(){
-            showDescription(data); 
-            item.appendChild(description);  
-        }
-        
-        
-        item.addEventListener('mouseleave', remove1);
-        function remove1(){ 
-            hideDescription("show"); 
-            item.removeChild(description);  
-        }
-        
-        console.log(data);
-    }); 
-    
+    // ...
+    fetch(pokemon.url).then(transformToJson).then((data) => {
+        // ...
+        item.textContent = data.name;
+        img.src = data.sprites.front_default;
+        list.appendChild(item);
+        item.appendChild(img);
+        item.addEventListener("click", (e) => {
+            showDescription(data);
+        });
+    });
 }
 
 /**
  * fill the item list with values
+ * ok
  */
 function fillList (json) {
-    emptyList();                        //ON REMPLIE LA LIST AVEC LES ITEMS
+    emptyList();
     json.results.forEach(createItem);
-    console.log(json);
 }
 
 /**
  * Fill and display the description
  */
 function showDescription (data) {
+    // ptn concentre toi w3school alsacreation 
+    // classlist,queryselectorall,TextContent et c tt
+    // fermer la fenetre
     description.classList.add("show");
+    // image dedans avec la source css
+    //truc du cour avec des test
+  //  const img = description.querySelectorAll(".test img");
     const fields = description.querySelectorAll("dd");
-    
-    
-      
+    //const img2 = description.querySelectorAll(".content img");
+    //img2.src = data.sprites.other["official-artwork"].front_default;
+   
+   
+   
     fields.forEach((dd) => {
-            
-        dd.textContent = data[dd.classList[0]];  // on recupere notre chemin dans l'API des données et one le stock ds notre "dd" les données non egales à "types"
+        // la ligne dur dd.textcontent obligé puis ...
+        //description.appendChild(img2);
+        if(dd.classList[0] != "types"){ 
+        dd.textContent = data[dd.classList[0]];
+        }else{
+            dd.textContent = " ";
+            data.types.forEach((type) => {
+                    dd.textContent += type.type.name+" ";
+        });
 
-      /* if(dd.classList[0] != "types"){
-        dd.textContent = data[dd.classList[0]];  // on recupere notre chemin dans l'API des données et one le stock ds notre "dd" les données non egales à "types"
-   }else{
-       dd.textContent = " "; 
-       data.types.forEach((type) => {          // les données = types sont stockées dans un nouveau "dd"(qui a deja les autres données), et on change le chemin pour venir chercher les données "types"
-           if(type.name > 1){
-               dd.textContent +=type.type.name;
-           }else{                                       
-               dd.textContent += type.type.name+" "; // ici on reprend le "dd" avec toutes les données + 1 données type, auquel on rajoute encore 1 données type, pour les pokémons qui ont plusieurs types
-           }
-       }
-   }*/
 
-    });
+
+    }
+});
 }
 
 /**
@@ -98,17 +93,7 @@ function showDescription (data) {
  */
 function hideDescription () {
     description.classList.remove("show");
-    //description.querySelectorAll.remove("dd"); 
 }
 
 // Fetch the API end-point and fill the list
-fetch(api).then(transformToJson).then(fillList); // FETCH GLOBAL
-
-/*Fetch permet d'appeler l'api (via son url). On ne sait cependant pas le temps que ça va mettre à avoir
-une réponse vu que c'est une requête réseau, ça dépend de la qualité du réseau. 
-Une fois que l'api à répondu, on utilise le "then" qui permet de dire quel liste d'actions à faire une fois
-qu'on a reçu la réponse (ex: stocker les données reçues dans un fichier Json). On peut utiliser plusieurs then,
-En gros on appel l'api, on stock les données reçues dans un .json, on remplie la List */
-
-
-// LIRE DE BAS EN HAUT 
+fetch(api).then(transformToJson).then(fillList);

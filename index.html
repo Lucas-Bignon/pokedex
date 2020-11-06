@@ -9,11 +9,11 @@
         <main>
             <ul id="list"></ul>
             <div id="description">
-                <!--<button class="close">❌</button>-->
+                <button class="close" onclick="hideDescription()">❌</button>
                 <dl>
                     <dt>Name</dt>
                     <dd class="name"></dd>
-                    <dt>ID</dt>
+                    <p>Id</p>
                     <dd class="id"></dd>
                     <dt>Poids</dt>
                     <dd class="weight"></dd>
@@ -24,8 +24,6 @@
                 </dl>
             </div>
         </main>
-        <script src="script.js"></script> <!--L'intérêt de mettre un script js à la fin permet de charger tout
-        ton site avant de charger ton .js, qui fait que l'utilisateur verra qlq chose dès le début. ça permet aussi 
-        de recup un élément si il est linker entre html/css -> js-->
+        <script src="script.js"></script>
     </body>
 </html>
